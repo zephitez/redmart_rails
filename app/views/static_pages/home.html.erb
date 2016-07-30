@@ -1,2 +1,13 @@
-<% provide(:title, 'Home') %>
-<p>This is the home page for Redmart</p>
+
+<div class="center jumbotron">
+  <h1>Welcome to the Redmart</h1>
+
+  <h2>
+    Your online convenient store.
+  </h2>
+
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+</div>
+
+<%= link_to image_tag("http://railstutorial.org/rails.png", alt: "Rails logo"),
+          'http://rubyonrails.org/rails.png' %>

@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title(yield(:title)) %></title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <h2><%= full_title(yield(:title)) %></h2
-    <%= yield %>
-  </body>
+    <head>
+        <title><%= full_title(yield(:title)) %></title>
+        <%= csrf_meta_tags %>
+        <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'partials/shim' %>
+    </head>
+    <body>
+        <%= render 'partials/header' %>
+        <div class="container center">
+            <h1><%= page_title(yield(:title)) %></h1>
+          </div>
+            <div class="container">
+            <%= yield %>
+        </div>
+          <%= render 'partials/footer' %>
+    </body>
 </html>
