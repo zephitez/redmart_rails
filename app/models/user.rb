@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-   attr_accessor :remember_token
+  has_many :reviews, dependent: :destroy
+
+  attr_accessor :remember_token
 
   before_save { email.downcase! }
   before_save { username.downcase! }
-
-
 
   validates :username, presence: true, length: { maximum: 10 }, uniqueness: { case_sensitive: false }
 
@@ -15,6 +15,11 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
 has_secure_password
+
+# Defines a proto-feed.
+ def feed
+   Review.where("user_id = ?", id)
+ end
 
 # Returns the hash digest of the given string.
   def User.digest(string)
