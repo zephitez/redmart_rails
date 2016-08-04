@@ -8,7 +8,6 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @review = @product.reviews.build
     @feed_items = @product.reviews.paginate(page: params[:page], :per_page => 10)
-    @cart = Cart.products.build
   end
 
   def destroy
