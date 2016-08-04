@@ -11,13 +11,10 @@ class CartsController < ApplicationController
   def create
     # create cart upon add to cart
     @added_product = Product.find( params[:product_id] )
-    # @cart = Cart.find_by(user_id: current_user.id)
 
-    @added_cart = @added_product.carts.build(
+    @added_cart = @added_product.carts.create(
       user_id: current_user.id
     )
-
-    # byebug
 
     if @added_cart.save
       flash[:success] = "Product Added to Cart Successfully"
