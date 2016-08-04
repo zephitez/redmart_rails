@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160803075154) do
   end
 
   create_table "carts_products", id: false, force: :cascade do |t|
-    t.integer "cart_id",    null: false
-    t.integer "product_id", null: false
-    t.integer "quantity"
+    t.integer "cart_id",                null: false
+    t.integer "product_id",             null: false
+    t.integer "quantity",   default: 1
     t.index ["cart_id", "product_id"], name: "index_carts_products_on_cart_id_and_product_id"
   end
 

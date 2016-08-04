@@ -3,7 +3,7 @@ class CreateJoinTableCartProduct < ActiveRecord::Migration[5.0]
     create_join_table :carts, :products do |t|
       t.index [:cart_id, :product_id]
       # t.index [:product_id, :cart_id]
-      t.integer :quantity
+      t.integer :quantity, :default => 1
     end
   end
 end

@@ -9,15 +9,19 @@ class CartsController < ApplicationController
   end
 
   def create
-    @current_user_cart = Cart.find_by user_id: current_user.id
+    # create cart upon add to cart
+    @added_product = Product.find( params[:product_id] )
+    # @cart = Cart.find_by(user_id: current_user.id)
 
-    @current_user_cart.products.create(
-      quantity: 1
-    );
+    @added_cart = @added_product.carts.build(
+      user_id: current_user.id
+    )
 
+    # byebug
 
-    if @current_user_cart.products.save
-    flash[:success] = "Product Added to Cart Successfully"
+    if @added_cart.save
+      flash[:success] = "Product Added to Cart Successfully"
+      redirect_to :back
     end
   end
 
