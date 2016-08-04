@@ -1,0 +1,20 @@
+<li>
+  <%= link_to product do %>
+  <div class="row">
+     <div class="col-md-5">
+     <img src="<%= product.picture %>"/>
+     <div class="col-md-8">
+     <%= product.name %><br>
+     <p>Price : <%= product.price %></p>
+   </div>
+ </div>
+ </div>
+  <% end %>
+
+<% if current_user && current_user.admin? && logged_in? %>
+        <p class="admin-option"> <%= link_to "show", product %> | <%= link_to "edit", edit_product_path(product.id) %> | <%= link_to "delete", product, method: :delete,
+                                 data: { confirm: "You sure?" } %>
+                               </p>
+
+ <% end %>
+</li>

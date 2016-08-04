@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  completion_status: false
+  final_bill: 9.99
+
+two:
+  user: two
+  completion_status: false
+  final_bill: 9.99

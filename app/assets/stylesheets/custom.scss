@@ -256,3 +256,21 @@ span.picture {
     border: 0;
   }
 }
+
+/* product */
+
+.products {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 20px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+.product-attr {
+   p {
+     font-weight:bold;
+   }
+}

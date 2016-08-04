@@ -10,3 +10,7 @@
    <% end %>
   </span>
 </li>
+<%= link_to review.product do %>
+   <img src="<%= review.product.picture %>"/>
+   <%= review.product.name %>
+<% end %>

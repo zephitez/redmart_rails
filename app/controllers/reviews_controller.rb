@@ -6,10 +6,10 @@ class ReviewsController < ApplicationController
       @review = current_user.reviews.build(review_params)
       if @review.save
         flash[:success] = "Review posted!"
-        redirect_to root_url
+        redirect_to :back
       else
-        @feed_items = []
-        render 'static_pages/home'
+        flash[:danger] = "Content can't be blank!"
+        redirect_to :back
       end
     end
 
@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   private
 
     def review_params
-      params.require(:review).permit(:content)
+      params.require(:review).permit(:content, :product_id)
     end
 
     def correct_user

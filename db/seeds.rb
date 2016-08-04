@@ -12,8 +12,8 @@ User.create!(username:  "zephitez",
              password_confirmation: "zhezhang",
              admin: true)
 
-50.times do |n|
-  username  = Faker::Lorem.characters(10)
+25.times do
+  username  = Faker::Name.first_name
   email = Faker::Internet.email
   password = "password"
   User.create!(username:  username,
@@ -22,8 +22,17 @@ User.create!(username:  "zephitez",
                password_confirmation: password)
 end
 
-users = User.order(:created_at).take(6)
 35.times do
-  content = Faker::Lorem.sentence(5)
-  users.each { |user| user.reviews.create!(content: content) }
+  Product.create!(picture: Faker::Avatar.image("my-own-slug", "120x120"),
+                  name: Faker::Commerce.product_name,
+                  price: Faker::Commerce.price,
+                  description: Faker::StarWars.quote
+  )
+end
+
+users = User.order(:created_at).take(5)
+30.times do
+  content = Faker::StarWars.quote
+  product = Product.pluck(:id)
+  users.each { |user| user.reviews.create!(content: content, product_id: product.sample) }
 end

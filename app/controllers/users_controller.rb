@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      #create cart
+      @cart = Cart.create!(user_id: @user.id)
       log_in @user
       flash[:success] = 'Welcome to Redmart!'
       redirect_to @user

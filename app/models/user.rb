@@ -1,35 +1,41 @@
 class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
-
+  has_many :products
+  has_many :carts
   attr_accessor :remember_token
 
   before_save { email.downcase! }
   before_save { username.downcase! }
 
-  validates :username, presence: true, length: { maximum: 10 }, uniqueness: { case_sensitive: false }
+  validates :username,
+            presence: true,
+            length: { maximum: 10 },
+            uniqueness: { case_sensitive: false }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :email, presence: true, length: { maximum: 50 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  validates :email,
+            presence: true,
+            length: { maximum: 50 },
+            format: { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false }
 
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password,
+            presence: true,
+            length: { minimum: 6 },
+            allow_nil: true
 
-has_secure_password
+  has_secure_password
 
-# Defines a proto-feed.
- def feed
-   Review.where("user_id = ?", id)
- end
-
-# Returns the hash digest of the given string.
-  def User.digest(string)
+  # Returns the hash digest of the given string.
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
   # Returns a random token.
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -46,8 +52,7 @@ has_secure_password
   end
 
   # Forgets a user.
-def forget
-  update_attribute(:remember_digest, nil)
-end
-
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 end
